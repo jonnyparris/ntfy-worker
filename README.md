@@ -68,6 +68,10 @@ Recognised on `POST`:
 `X-Title`, `X-Priority`, `X-Tags`, `X-Click`, `X-Actions`, `X-Markdown`,
 `X-Icon`, `X-Attach`.
 
+Each is also accepted without the `X-` prefix (`Title`, `Priority`,
+etc.) — public ntfy.sh works this way, and clients in the wild send
+both forms. The `X-` form wins when both are present.
+
 ## Quick start
 
 ```bash

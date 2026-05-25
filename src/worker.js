@@ -27,8 +27,19 @@
  * lists are isolated by topic but globally consistent across requests.
  */
 
-const VERSION = "1.3.0";
-const DEPLOYED_AT = "2026-04-26T09:13:53.838Z";
+const VERSION = "1.4.0";
+const DEPLOYED_AT = "2026-05-25T12:35:00.000Z";
+
+/**
+ * ntfy.sh accepts metadata headers in two forms: the canonical
+ * `X-Title` / `X-Priority` / `X-Tags` / `X-Click` and the shorthand
+ * `Title` / `Priority` / `Tags` / `Click` (no prefix). Both are
+ * documented and widely used by clients in the wild — Dodo's notify
+ * module sends the shorthand. Read either, prefer the `X-` form.
+ */
+function readNtfyHeader(request, name) {
+  return request.headers.get(`X-${name}`) ?? request.headers.get(name);
+}
 
 /** Constant-time string compare. Both inputs are coerced to UTF-8 bytes. */
 function timingSafeEqual(a, b) {
@@ -90,15 +101,15 @@ export class TopicRoom {
         time: Math.floor(Date.now() / 1000),
         event: "message",
         topic,
-        title: request.headers.get("X-Title"),
+        title: readNtfyHeader(request, "Title"),
         message: body,
-        priority: request.headers.get("X-Priority"),
-        tags: request.headers.get("X-Tags"),
-        click: request.headers.get("X-Click"),
-        actions: request.headers.get("X-Actions"),
-        markdown: request.headers.get("X-Markdown"),
-        icon: request.headers.get("X-Icon"),
-        attachment: request.headers.get("X-Attach"),
+        priority: readNtfyHeader(request, "Priority"),
+        tags: readNtfyHeader(request, "Tags"),
+        click: readNtfyHeader(request, "Click"),
+        actions: readNtfyHeader(request, "Actions"),
+        markdown: readNtfyHeader(request, "Markdown"),
+        icon: readNtfyHeader(request, "Icon"),
+        attachment: readNtfyHeader(request, "Attach"),
       };
       this.history.push(msg);
       if (this.history.length > 100) this.history.shift();
