@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ntfy-worker",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-01-01",
+  "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "TOPIC_ROOM",
+        "class_name": "TopicRoom"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["TopicRoom"]
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

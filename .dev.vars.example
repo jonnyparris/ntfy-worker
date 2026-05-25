@@ -1,0 +1,7 @@
+# Local dev secrets. Copy to .dev.vars and fill in a value.
+# Never commit .dev.vars. In production, use `wrangler secret put NTFY_TOKEN`.
+
+# Shared bearer token. Required on every request to a topic
+# (publish, subscribe, /:topic/json). Generate with:
+#   openssl rand -base64 32
+NTFY_TOKEN=replace-me-with-a-long-random-string

@@ -1,0 +1,16 @@
+{
+  "name": "ntfy-worker",
+  "version": "1.2.0",
+  "private": false,
+  "description": "Tiny ntfy.sh-compatible publish/subscribe worker for Cloudflare Workers + Durable Objects.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}
