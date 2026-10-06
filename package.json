@@ -5,12 +5,15 @@
   "description": "Tiny ntfy.sh-compatible publish/subscribe worker for Cloudflare Workers + Durable Objects.",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "tail": "wrangler tail"
+    "dev": "cf dev",
+    "build": "cf build",
+    "deploy": "cf deploy",
+    "tail": "npx wrangler@latest tail ntfy-worker"
   },
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "^4"
+    "@cloudflare/vite-plugin": "^2.0.0-beta.sha-52b0dc0e9",
+    "cf": "^1.0.0-beta.12",
+    "vite": "^7.3.7"
   }
 }

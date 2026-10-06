@@ -17,7 +17,7 @@
  * Topic routes (publish, subscribe, history) require a bearer token:
  *     Authorization: Bearer <NTFY_TOKEN>
  * The expected token is read from the `NTFY_TOKEN` secret binding.
- * Set it with `wrangler secret put NTFY_TOKEN`.
+ * Set it with `cf workers secrets update NTFY_TOKEN --worker ntfy-worker ...`.
  *
  * If `NTFY_TOKEN` is unset the worker refuses every topic request with
  * 503 — there is no anonymous mode. The unauthenticated paths above

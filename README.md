@@ -51,14 +51,14 @@ Set the token before first deploy:
 # Generate a strong token
 openssl rand -base64 32
 
-# Store it in Cloudflare (paste the value at the prompt)
-wrangler secret put NTFY_TOKEN
+# Store it in Cloudflare
+cf workers secrets update NTFY_TOKEN --worker ntfy-worker --type secret_text --text "<token>"
 ```
 
 For local development, copy `.dev.vars.example` to `.dev.vars` and fill in
 a value. `.dev.vars` is gitignored.
 
-Rotate by running `wrangler secret put NTFY_TOKEN` again. All clients have
+Rotate by running the same `cf workers secrets update` command again. All clients have
 to update at the same time — there's intentionally no rolling window.
 
 ## ntfy headers
@@ -78,7 +78,7 @@ both forms. The `X-` form wins when both are present.
 git clone https://github.com/jonnyparris/ntfy-worker.git
 cd ntfy-worker
 npm install
-wrangler secret put NTFY_TOKEN     # paste a strong random value
+cf workers secrets update NTFY_TOKEN --worker ntfy-worker --type secret_text --text "<token>"
 npm run deploy
 ```
 
